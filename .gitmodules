@@ -1,0 +1,6 @@
+[submodule "Assets/Modules/UnityAITools"]
+	path = Assets/Modules/UnityAITools
+	url = https://github.com/SuchakreeS/UnityAITools.git
+[submodule "Assets/Plugin/UniRx"]
+	path = Assets/Plugin/UniRx
+	url = https://github.com/SuchakreeS/UniRx.git
