@@ -13,7 +13,8 @@ namespace SnakeAI.Controller
 	{
 		// -------------------------------------------------------------------------------------------------
 		
-		private GameBoard _Controller;
+		[HideInInspector]
+		public GameBoard Controller;
 		
 		// -------------------------------------------------------------------------------------------------
 		
@@ -29,27 +30,7 @@ namespace SnakeAI.Controller
 
 		public override void CollectObservations(VectorSensor sensor)
 		{
-			// Snake10x10Learning
-			var headX = _Controller.State.Head.x / _Controller.State.Width;
-			var headY = _Controller.State.Head.y / _Controller.State.Height;
-			var foodX = _Controller.State.Food.x / _Controller.State.Width;
-			var foodY = _Controller.State.Food.y / _Controller.State.Height;
-			sensor.AddObservation(headX);
-			sensor.AddObservation(headY);
-			sensor.AddObservation(foodX);
-			sensor.AddObservation(foodY);
-			sensor.AddObservation(Math.Abs(headX - foodX));
-			sensor.AddObservation(Math.Abs(headY - foodY));
-			sensor.AddObservation(_Controller.State.Tails.Count);
-
-			// Obs State
-			for(var i = 0; i < _Controller.State.Width; i++)
-			{
-				for(var j = 0; j < _Controller.State.Height; j++)
-				{
-					sensor.AddObservation(_Controller.State.StateBlock[i, j].GetHashCode() / 5f);
-				}
-			}
+			
 		}
 
 		public override void OnActionReceived(float[] vectorAction)
@@ -61,23 +42,23 @@ namespace SnakeAI.Controller
 					// Do nothing
 					break;
 				case 1:
-					_Controller.Direction = State.DirectionType.Up;
+					Controller.Direction = State.DirectionType.Up;
 					break;
 				case 2:
-					_Controller.Direction = State.DirectionType.Down;
+					Controller.Direction = State.DirectionType.Down;
 					break;
 				case 3:
-					_Controller.Direction = State.DirectionType.Right;
+					Controller.Direction = State.DirectionType.Right;
 					break;
 				case 4:
-					_Controller.Direction = State.DirectionType.Left;
+					Controller.Direction = State.DirectionType.Left;
 					break;
 			}
 		}
 
 		public override void OnEpisodeBegin()
 		{
-			_Controller.SetStartBoard();
+			Controller.SetStartBoard();
 		}
 
 		#endregion
@@ -88,7 +69,7 @@ namespace SnakeAI.Controller
 
 		public void InitBoard(GameBoard _controller)
 		{
-			_Controller = _controller;
+			Controller = _controller;
 		}
 
 		public void MakeDecision() => RequestDecision();
