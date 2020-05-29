@@ -6,7 +6,7 @@
 
   - Version 1
 
-    ![snake-traditional-1](Resources\snake-traditional-1.gif)
+    ![snake-traditional-1](Resources/snake-traditional-1.gif)
   
     | Name                  | Description                                          |
     | --------------------- | ---------------------------------------------------- |
@@ -15,7 +15,7 @@
 
   - Version 2
   
-    ![snake-traditional-2](Resources\snake-traditional-2.gif)
+    ![snake-traditional-2](Resources/snake-traditional-2.gif)
     
     | Name                  | Description                                                  |
     | --------------------- | ------------------------------------------------------------ |
