@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using SnakeAI.Scripts.Entities;
 using UnityEngine;
 using UniRx;
 
@@ -10,32 +11,18 @@ namespace SnakeAI.Game
 {
     public class State
 	{
-		public const DirectionType DEFAULT_DIRECTION = DirectionType.Right;
+		private const DirectionType _DEFAULT_DIRECTION = DirectionType.Right;
 		public int Height;
 		public int Width;
-		public BlockType[,] StateBlock;
+		public readonly BlockType[,] StateBlock;
 		public Vector2 Head;
 		public Vector2 Food;
-		public List<Vector2> Tails;
-		public DirectionType Direction;
+		public readonly List<Vector2> Tails;
+		private DirectionType _Direction;
 		public bool GameOver;
 		public bool Eat;
 
-		public enum BlockType
-		{
-			Blank,
-			Head,
-			Tail,
-			Food,
-			Wall
-		}
-		public enum DirectionType
-		{
-			Up,
-			Down,
-			Right,
-			Left
-		}
+		
 		public State(int _width = 10, int _height = 10)
 		{
 			// State Size
@@ -47,20 +34,46 @@ namespace SnakeAI.Game
 
 			// Create StateBlock
 			StateBlock = new BlockType[_width, _height];
-			Direction = DEFAULT_DIRECTION;
+			_Direction = _DEFAULT_DIRECTION;
 
 			// Set Snake and Food
 			SetHead(new Vector2(halfWidth, halfHeight));
 			var availableFood = GetAvailableFood();
 			SetFood(availableFood[Random.Range(0, availableFood.Count)]);
-			
 		}
+
+		public State Clone()
+		{
+			var state = new State(Width, Height)
+			{
+				Height = Height,
+				Width = Width,
+				Head = Head,
+				Food = Food,
+				_Direction = _Direction,
+				GameOver = GameOver,
+				Eat = Eat
+			};
+			for (var i = 0; i < Width; i++)
+			{
+				for (var j = 0; j < Height; j++)
+				{
+					state.StateBlock[i, j] = StateBlock[i, j];
+				}
+			}
+			foreach (var tail in Tails)
+			{
+				state.Tails.Add(tail);
+			}
+			return state;
+		}
+
 		public void Next(DirectionType _direction)
 		{
 			// Wrong Direction
-			if(GetNegativeDirection(_direction) == Direction)
+			if(GetNegativeDirection(_direction) == _Direction)
 			{
-				_direction = Direction;
+				_direction = _Direction;
 			}
 
 			// Check GameOver
@@ -78,7 +91,7 @@ namespace SnakeAI.Game
 
 			// Set Snake
 			SetHead(headNext);
-			Direction = _direction;
+			_Direction = _direction;
 
 			// Generate food
 			if(Eat)
@@ -135,9 +148,7 @@ namespace SnakeAI.Game
 		}
 
 		public void PrintDebug()
-		{
-			Debug.Log($"Head: {Head}");		
-			Debug.Log($"Food: {Food}");		
+		{	
 			for(int i = 0; i < Width; i++)
 			{
 				var line = "";
@@ -172,7 +183,7 @@ namespace SnakeAI.Game
 			else if(_direction == DirectionType.Left) return _vector + new Vector2(-1, 0);
 			return Vector2.zero;
 		}
-		private DirectionType GetNegativeDirection(DirectionType _direction)
+		public static DirectionType GetNegativeDirection(DirectionType _direction)
 		{
 			if(_direction == DirectionType.Up) return DirectionType.Down;
 			else if(_direction == DirectionType.Down) return DirectionType.Up;

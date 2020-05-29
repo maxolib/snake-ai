@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SnakeAI.Game;
+using SnakeAI.Scripts.Entities;
 using TMPro;
 using UniRx;
 using Unity.MLAgents;
@@ -15,13 +16,15 @@ namespace SnakeAI.Controller
 		
 		[HideInInspector]
 		public GameBoard Controller;
-		
+
+		private DirectionType _Direction;
 		// -------------------------------------------------------------------------------------------------
 		
 		#region AGENT OVERRIDE METHOD
 
 		public override void Initialize()
 		{
+			
 		}
 
 		public override void Heuristic(float[] actionsOut)
@@ -42,16 +45,16 @@ namespace SnakeAI.Controller
 					// Do nothing
 					break;
 				case 1:
-					Controller.Direction = State.DirectionType.Up;
+					_Direction = DirectionType.Up;
 					break;
 				case 2:
-					Controller.Direction = State.DirectionType.Down;
+					_Direction = DirectionType.Down;
 					break;
 				case 3:
-					Controller.Direction = State.DirectionType.Right;
+					_Direction = DirectionType.Right;
 					break;
 				case 4:
-					Controller.Direction = State.DirectionType.Left;
+					_Direction = DirectionType.Left;
 					break;
 			}
 		}
@@ -72,7 +75,12 @@ namespace SnakeAI.Controller
 			Controller = _controller;
 		}
 
-		public void MakeDecision() => RequestDecision();
+		public void MakeDecision(State _state)
+		{
+			RequestDecision();
+			Controller.Direction = _Direction;
+		}
+
 		public void OnGameOver()
 		{
 			SetReward(-1f);

@@ -1,7 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using SnakeAI.Extention;
+using SnakeAI.Scripts.Entities;
 using UnityEngine;
 using TMPro;
 using UniRx;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace SnakeAI.Game
 {
@@ -9,43 +14,94 @@ namespace SnakeAI.Game
     {
         // ---------------------------------------------------------------------------
         [Header("Board Object")]
-        [SerializeField] private GameObject m_GroundObject;
-        [SerializeField] private GameObject m_SnakeObject;
-        [SerializeField] private GameObject m_FoodObject;
+        [SerializeField] private RectTransform m_GroundTransform;
+        [SerializeField] private AspectRatioFitter m_GroundRatio;
+        [SerializeField] private Image m_HeadImage;
+        [SerializeField] private Image m_FoodImage;
+        [SerializeField] private Image m_TailImage;
         [SerializeField] private Transform m_TailTransform;
-        [SerializeField] private Canvas m_UI;
         [SerializeField] private TextMeshProUGUI m_ScoreText;
         
-        public List<GameObject> Tails { get; private set; }
+        [Header("Setting")]
+        [SerializeField] private Color m_HeadColor;
+        [SerializeField] private Color m_TailColor;
+        [SerializeField] private Color m_FoodColor;
         
         // ---------------------------------------------------------------------------
-        public override void OnStart()
+        public float BoardWidth => m_GroundTransform.sizeDelta.x;
+        public float BlockSize => BoardWidth / BoardSize.x;
+        public float BlockBorderSize => (BlockSize * 0.05f);
+        // ---------------------------------------------------------------------------
+        public List<Image> Tails { get; private set; }
+
+        private Image Head;
+        private Image Food;
+        // ---------------------------------------------------------------------------
+        protected override void OnStart()
         {
             Score.Subscribe(_value => m_ScoreText.text = _value.ToString());
+
+            Head = CreateBlock(m_HeadImage, transform, m_HeadColor);
+            Food = CreateBlock(m_FoodImage, transform, m_FoodColor);
+            SetBlockPosition(Head, Vector2.zero);
+            SetBlockPosition(Food, Vector2.zero);
         }
-        public override void RenderState()
+
+        public Image CreateBlock(Image _obj, Transform _transform, Color _color)
+        {
+            var image = Instantiate(_obj, _transform);
+            image.color = _color;
+            image.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, BlockSize - 2 * BlockBorderSize);
+            image.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, BlockSize - 2 * BlockBorderSize);
+            return image;
+        }
+        
+        public Image CreateTileBlock(Image _obj, Transform _transform, Color _color, DirectionType _direction)
+        {
+            var image = Instantiate(_obj, _transform);
+            image.color = Color.blue;
+            image.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, BlockSize - 2 * BlockBorderSize);
+            image.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, BlockSize - 2 * BlockBorderSize);
+            var position = _direction.GetVector() * BlockSize * 0.2f;
+            _obj.GetComponent<RectTransform>().localPosition = position;
+            return image;
+        }
+
+        private void SetBlockPosition(Image _obj, Vector2 _position)
+        {
+            var position = _position * BlockSize;
+            _obj.GetComponent<RectTransform>().localPosition = position;
+        }
+
+        protected override void RenderState()
         {
             Vector3 SetTransform(Vector2 _index) => new Vector3(_index.x, _index.y, 0);
-
-            var position = transform.localPosition;
-            m_SnakeObject.transform.localPosition = SetTransform(State.Head);
-            m_FoodObject.transform.localPosition = SetTransform(State.Food);
+            SetBlockPosition(Head, State.Head);
+            SetBlockPosition(Food, State.Food);
             if(State.Eat)
             {
-                var position1 = transform.position;
-                var tailPosition = State.Tails[State.Tails.Count-1] + new Vector2(position1.x, position1.y);
-                var tail = Instantiate(m_SnakeObject.gameObject, tailPosition, Quaternion.identity);
-                tail.transform.SetParent(m_TailTransform);
+                var tailPosition = State.Tails[State.Tails.Count-1];
+                var tail = CreateBlock(m_TailImage, m_TailTransform, m_TailColor);
+                SetBlockPosition(tail, tailPosition);
+                
+                DirectionType direction = GetDirectionFromPoints(tailPosition,State.Head);
+                
+                // var lineTail = CreateTileBlock(m_TailImage, tail.transform, m_SnakeColor, direction);
+                
                 Tails.Add(tail);
             }
             else
             {
                 if (State.Tails.Count <= 0) return;
 
-                var position1 = transform.position;
-                var tailPosition = State.Tails[State.Tails.Count-1] + new Vector2(position1.x, position1.y);
-                var tail = Instantiate(m_SnakeObject.gameObject, tailPosition, Quaternion.identity);
-                tail.transform.SetParent(m_TailTransform);
+                var tailPosition = State.Tails[State.Tails.Count-1];
+                var tail = CreateBlock(m_TailImage, m_TailTransform, m_TailColor);
+                SetBlockPosition(tail, tailPosition);
+                
+                DirectionType direction = GetDirectionFromPoints(tailPosition,State.Head);
+                
+                // var lineTail = CreateTileBlock(m_TailImage, tail.transform, m_SnakeColor, direction);
+                
                 Tails.Add(tail);
                 var temp = Tails[0];
                 Tails.RemoveAt(0);
@@ -53,15 +109,10 @@ namespace SnakeAI.Game
             }
         }
 
-        public override void SetStateObject()
+        protected override void SetStateObject()
         {
-            var size = (int) BoardSize;
-            var groundSize = (size/2f) - 0.5f;
-            State = new State(size, size);
-            m_GroundObject.transform.localPosition = new Vector3(groundSize, groundSize, 0);
-            m_GroundObject.transform.localScale = new Vector3(size, size, 0);
-            m_UI.transform.localPosition = new Vector3(groundSize, groundSize, 0);
-            m_UI.gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(size, size);
+            m_GroundRatio.aspectRatio = BoardSize.x / BoardSize.y;
+            State = new State((int) BoardSize.x, (int) BoardSize.y);
             Score.SetValueAndForceNotify(0);
             
             if(Tails != null)
@@ -73,7 +124,26 @@ namespace SnakeAI.Game
                     Destroy(tail.gameObject);
                 }
             }
-            Tails = new List<GameObject>();
+            Tails = new List<Image>();
+        }
+        // ---------------------------------------------------------------------------
+        private static DirectionType GetDirectionFromPoints(Vector2 _start, Vector2 _end)
+        {
+            var startX = (int) _start.x;
+            var startY = (int) _start.y;
+            var endX = (int) _end.x;
+            var endY = (int) _end.y;
+            var hor = _end.x - _start.x;
+            var ver = _end.y - _start.y;
+            
+            if (Math.Abs(hor) < 0.00000001 && ver >= 0) return DirectionType.Up;
+            else if (Math.Abs(hor) < 0.00000001 && ver < 0) return DirectionType.Down;
+            else if (hor < 0 && Math.Abs(ver) < 0.00000001) return DirectionType.Left;
+            else if (hor >= 0 && Math.Abs(ver) < 0.00000001) return DirectionType.Right;
+            else
+            {
+                return DirectionType.Right;
+            }
         }
         // ---------------------------------------------------------------------------
     }

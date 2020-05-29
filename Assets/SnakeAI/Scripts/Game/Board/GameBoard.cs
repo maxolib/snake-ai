@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SnakeAI.Controller;
+using SnakeAI.Scripts.Entities;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -16,15 +17,15 @@ namespace SnakeAI.Game
         
         [Header("Parameter")]
         [SerializeField] private float m_BoardSpeed;
-        [SerializeField] private int m_BoardSize;
+        [SerializeField] private Vector2 m_BoardSize;
         // ---------------------------------------------------------------------------
         public ISnake Snake;
         public float BoardSpeed => m_BoardSpeed;
-        public float BoardSize => m_BoardSize;
+        public Vector2 BoardSize => m_BoardSize;
         public bool IsPlay { get; private set; }
         public State State { get; set; }
         public float Timer { get; private set; }
-        public State.DirectionType Direction { get; set; }
+        public DirectionType Direction { get; set; }
         // ---------------------------------------------------------------------------
         public ReactiveProperty<int> Score = new ReactiveProperty<int>();
         // ---------------------------------------------------------------------------
@@ -39,7 +40,6 @@ namespace SnakeAI.Game
             if (Snake != null)
             {
                 Snake.InitBoard(this);
-                SetStateObject();
 
                 Observable.EveryUpdate().Where(_ => IsPlay && !State.GameOver).Subscribe
                 (
@@ -50,9 +50,9 @@ namespace SnakeAI.Game
                 (
                     _ =>
                     {
-                        Snake.MakeDecision();
                         Timer = 0f;
                         State.Next(Direction);
+                        Snake.MakeDecision(State);
                         if (State.GameOver)
                         {
                             Snake.OnGameOver();
@@ -74,6 +74,8 @@ namespace SnakeAI.Game
 
             Score.SetValueAndForceNotify(0);
             
+            
+            SetStateObject();
             RenderState();
             IsPlay = true;
         }
@@ -86,10 +88,11 @@ namespace SnakeAI.Game
         }
         // ---------------------------------------------------------------------------
         #region ABSTRACT
-        public abstract void OnStart();
-        public abstract void RenderState();
 
-        public abstract void SetStateObject();
+        protected abstract void OnStart();
+        protected abstract void RenderState();
+
+        protected abstract void SetStateObject();
 
         #endregion
         // ---------------------------------------------------------------------------

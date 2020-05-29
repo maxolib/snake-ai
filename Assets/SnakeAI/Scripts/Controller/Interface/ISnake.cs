@@ -11,7 +11,7 @@ namespace SnakeAI.Controller
     public interface ISnake
     {
         void InitBoard(GameBoard _controller);
-        void MakeDecision();
+        void MakeDecision(State _state);
         void OnGameOver();
         void OnEat();
     }
