@@ -10,7 +10,7 @@
   
     | Name                  | Description                                          |
     | --------------------- | ---------------------------------------------------- |
-  | Condition             | - Finding food directions (Random if more than one ) |
+    | Condition             | - Finding food directions (Random if more than one ) |
     | Board size limitation | unlimited                                            |
 
   - Version 2
