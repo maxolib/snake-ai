@@ -4,15 +4,16 @@ using SnakeAI.Scripts.Entities;
 using UniRx;
 using UnityEngine;
 
+// ReSharper disable once CheckNamespace
 namespace SnakeAI.Controller.Player
 {
     public class PlayerSnake : MonoBehaviour,  ISnake
     {
         [HideInInspector]
-        public GameBoard Controller;
+        public GameBoard m_Controller;
         public void InitBoard(GameBoard _controller)
         {
-            Controller = _controller;
+            m_Controller = _controller;
         }
 
         private void Start()
@@ -28,17 +29,21 @@ namespace SnakeAI.Controller.Player
             Observable
                 .EveryUpdate()
                 .Where(_ => Input.GetKeyDown(_keyCode))
-                .Subscribe(_ => Controller.Direction = _direction).AddTo(this);
+                .Subscribe(_ => m_Controller.Direction = _direction).AddTo(this);
         }
 
         public void MakeDecision(State _state)
         {
-            Debug.Log(Controller.Direction);
+            Debug.Log(m_Controller.Direction);
         }
 
         public void OnGameOver()
         {
-            Controller.SetStartBoard();
+            m_Controller.SetStartBoard();
+        }
+        public void OnWin()
+        {
+            m_Controller.SetStartBoard();
         }
 
         public void OnEat()

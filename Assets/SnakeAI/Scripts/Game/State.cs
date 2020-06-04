@@ -20,6 +20,7 @@ namespace SnakeAI.Game
 		public readonly List<Vector2> Tails;
 		private DirectionType _Direction;
 		public bool GameOver;
+		public bool Win;
 		public bool Eat;
 
 		
@@ -52,6 +53,7 @@ namespace SnakeAI.Game
 				Food = Food,
 				_Direction = _Direction,
 				GameOver = GameOver,
+				Win = Win,
 				Eat = Eat
 			};
 			for (var i = 0; i < Width; i++)
@@ -97,15 +99,18 @@ namespace SnakeAI.Game
 			if(Eat)
 			{
 				var availableFood = GetAvailableFood();
-				SetFood(availableFood[Random.Range(0, availableFood.Count)]);
+				if(availableFood.Count != 0)
+					SetFood(availableFood[Random.Range(0, availableFood.Count)]);
+				else
+					Win = true;
 			}
 		}
 		public List<Vector2> GetAvailableFood()
 		{
 			var list = new List<Vector2>();
-			for(int i = Width - 1; i > 0; i--)
+			for(int i = Width - 1; i >= 0; i--)
 			{
-				for(int j = Height - 1; j > 0; j--)
+				for(int j = Height - 1; j >= 0; j--)
 				{
 					if (StateBlock[i, j] == BlockType.Blank)
 					{

@@ -57,6 +57,10 @@ namespace SnakeAI.Game
                         {
                             Snake.OnGameOver();
                         }
+                        else if(State.Win)
+                        {
+                            Snake.OnWin();
+                        }
                         else if (State.Eat)
                         {
                             Snake.OnEat();

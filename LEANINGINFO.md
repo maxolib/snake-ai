@@ -11,8 +11,8 @@
 
 | Name                        | Command                                                      |
 | --------------------------- | ------------------------------------------------------------ |
-| Start training              | `mlagents-learn config/trainer_config.yaml --run-id=first3DBallRun`<br /><br />`--resume` - continuous old model<br />`--env` - path of unity executable file in case of build |
-| Observing Training Progress | `tensorboard --logdir=summaries`                             |
+| Start training              | mlagents-learn config/trainer_config.yaml --run-id=ML1<br /><br />`--resume` - continuous old model<br />`--env` - path of unity executable file in case of build |
+| Observing Training Progress | tensorboard --logdir=summaries                               |
 |                             |                                                              |
 |                             |                                                              |
 |                             |                                                              |

@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Reflection;
 using SnakeAI.Game;
+
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
+#endif
+
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -13,6 +17,7 @@ namespace SnakeAI.Controller
         void InitBoard(GameBoard _controller);
         void MakeDecision(State _state);
         void OnGameOver();
+        void OnWin();
         void OnEat();
     }
 
@@ -34,6 +39,7 @@ namespace SnakeAI.Controller
         [SerializeField]
         private UnityEngine.Object _strategyObject;
     }
+    #if UNITY_EDITOR
     public class GameBoardEditor : MonoBehaviour
     {
         [CustomPropertyDrawer(typeof(SnakeContainer), true)]
@@ -68,4 +74,5 @@ namespace SnakeAI.Controller
             }
         }
     }
+    #endif
 }

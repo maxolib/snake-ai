@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/SnakeAI/Scenes/00.training.unity
+  - enabled: 0
+    path: Assets/SnakeAI/Scenes/01.gameplay.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/SnakeAI/Scenes/02.training.unity
+    guid: ee33a45e629c0894780f0ff05dbe533e
   m_configObjects: {}

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2876461876740012775}
   - component: {fileID: 2876461876740012772}
-  - component: {fileID: 6985757862471937589}
+  - component: {fileID: -6017956805019159536}
   m_Layer: 0
-  m_Name: FirstGen
+  m_Name: ML6Sanke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,18 +45,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 107
+    VectorObservationSize: 115
     NumStackedVectorObservations: 1
     VectorActionSize: 05000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
-  m_Model: {fileID: 5022602860645237092, guid: b74a6b1c8964a4344a6ea6ea0729bec6, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 6ed26f89b22923e4e84d369e00e4179f, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: SAI000
+  m_BehaviorName: ML6
   TeamId: 0
   m_UseChildSensors: 0
---- !u!114 &6985757862471937589
+--- !u!114 &-6017956805019159536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,11 +65,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2876461876740012770}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78a97e66d9b06f143b822e6edab95b91, type: 3}
+  m_Script: {fileID: 11500000, guid: 457355b264717e049b798ef49ae1159d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  Controller: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_Heuristic: 0

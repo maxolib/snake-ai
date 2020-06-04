@@ -74,18 +74,24 @@ namespace SnakeAI.Controller.Player
                     removeList.Add(direction);
             }
             noFoodDirections = noFoodDirections.Except(removeList).ToList();
-            Debug.Log("------------ Food ---------------");
+            /*
+            หDebug.Log("------------ Food ---------------");
             foreach (var direction in foodDirections)
                 Debug.Log(direction);
             
             Debug.Log("------------ No Food ---------------");
             foreach (var direction in noFoodDirections)
                 Debug.Log(direction);
+                */
             Controller.Direction = foodDirections.Count != 0 ? foodDirections.Random() : 
                 noFoodDirections.Count != 0 ? noFoodDirections.Random() : Controller.Direction;
         }
 
         public void OnGameOver()
+        {
+            Controller.SetStartBoard();
+        }
+        public void OnWin()
         {
             Controller.SetStartBoard();
         }
