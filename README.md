@@ -25,7 +25,7 @@ SnakeAI is the AI experimentation for Snake game that was implemented in Unity e
 
 - ##### ML1Version 1
 
-  ![snake-traditional-1](C:/Files/workspace/SnakeAI/Resources/snake-traditional-1.gif)
+  ![snake-traditional-1](Resources/snake-traditional-1.gif)
 
   | Name                  | Description                                          |
   | --------------------- | ---------------------------------------------------- |
@@ -34,7 +34,7 @@ SnakeAI is the AI experimentation for Snake game that was implemented in Unity e
 
 - ##### Version 2
 
-  ![snake-traditional-2](C:/Files/workspace/SnakeAI/Resources/snake-traditional-2.gif)
+  ![snake-traditional-2](Resources/snake-traditional-2.gif)
 
   | Name                  | Description                                                  |
   | --------------------- | ------------------------------------------------------------ |
@@ -45,7 +45,7 @@ SnakeAI is the AI experimentation for Snake game that was implemented in Unity e
 
 - ##### ML1
 
-  ![snake-traditional-1](C:/Files/workspace/SnakeAI/Resources/snake-ml1.gif)
+  ![snake-traditional-1](Resources/snake-ml1.gif)
 
   | Name       | Description                          |
   | ---------- | ------------------------------------ |
@@ -56,7 +56,7 @@ SnakeAI is the AI experimentation for Snake game that was implemented in Unity e
 
 - ##### ML2
 
-  ![snake-traditional-1](C:/Files/workspace/SnakeAI/Resources/snake-ml2.gif)
+  ![snake-traditional-1](Resources/snake-ml2.gif)
 
   | Name       | Description                                                  |
   | ---------- | ------------------------------------------------------------ |
@@ -67,7 +67,7 @@ SnakeAI is the AI experimentation for Snake game that was implemented in Unity e
 
 - ##### ML3
 
-  ![snake-traditional-1](C:/Files/workspace/SnakeAI/Resources/snake-ml3.gif)
+  ![snake-traditional-1](Resources/snake-ml3.gif)
 
   | Name       | Description                                                  |
   | ---------- | ------------------------------------------------------------ |
@@ -78,7 +78,7 @@ SnakeAI is the AI experimentation for Snake game that was implemented in Unity e
 
 - ##### ML4
 
-  ![snake-traditional-1](C:/Files/workspace/SnakeAI/Resources/snake-ml4.gif)
+  ![snake-traditional-1](Resources/snake-ml4.gif)
 
   | Name       | Description                                                  |
   | ---------- | ------------------------------------------------------------ |
@@ -89,7 +89,7 @@ SnakeAI is the AI experimentation for Snake game that was implemented in Unity e
 
 - ##### ML5
 
-  ![snake-traditional-1](C:/Files/workspace/SnakeAI/Resources/snake-ml5.gif)
+  ![snake-traditional-1](Resources/snake-ml5.gif)
 
   | Name       | Description                                                  |
   | ---------- | ------------------------------------------------------------ |
@@ -100,7 +100,7 @@ SnakeAI is the AI experimentation for Snake game that was implemented in Unity e
 
 - ##### ML6
 
-  ![snake-traditional-1](C:/Files/workspace/SnakeAI/Resources/snake-ml6.gif)
+  ![snake-traditional-1](Resources/snake-ml6.gif)
 
   | Name       | Description                                                  |
   | ---------- | ------------------------------------------------------------ |
