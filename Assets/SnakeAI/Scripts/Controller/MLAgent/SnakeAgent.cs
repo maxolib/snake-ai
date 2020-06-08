@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using SnakeAI.Game;
+﻿using SnakeAI.Game;
 using SnakeAI.Scripts.Entities;
-using TMPro;
 using UniRx;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 // ReSharper disable once CheckNamespace
 namespace SnakeAI.Controller
@@ -26,13 +22,11 @@ namespace SnakeAI.Controller
 
 		public override void Initialize()
 		{
-			if(m_Heuristic)
-			{
-				SetKeyObservable(KeyCode.LeftArrow, DirectionType.Left);
-				SetKeyObservable(KeyCode.RightArrow, DirectionType.Right);
-				SetKeyObservable(KeyCode.DownArrow, DirectionType.Down);
-				SetKeyObservable(KeyCode.UpArrow, DirectionType.Up);
-			}
+			if (!m_Heuristic) return;
+			SetKeyObservable(KeyCode.LeftArrow, DirectionType.Left);
+			SetKeyObservable(KeyCode.RightArrow, DirectionType.Right);
+			SetKeyObservable(KeyCode.DownArrow, DirectionType.Down);
+			SetKeyObservable(KeyCode.UpArrow, DirectionType.Up);
 		}
 		private void SetKeyObservable(KeyCode _keyCode, DirectionType _direction)
         {
@@ -43,17 +37,25 @@ namespace SnakeAI.Controller
         }
 		public override void Heuristic(float[] _actionsOut)
 		{
-			if(m_Heuristic)
+			if (!m_Heuristic) return;
+			_actionsOut[0] = 0;
+			switch (_Direction)
 			{
-				_actionsOut[0] = 0;
-				if(_Direction == DirectionType.Up)
+				case DirectionType.Up:
 					_actionsOut[0] = 1;
-				else if(_Direction == DirectionType.Down)
+					break;
+				case DirectionType.Down:
 					_actionsOut[0] = 2;
-				else if(_Direction == DirectionType.Right)
+					break;
+				case DirectionType.Right:
 					_actionsOut[0] = 3;
-				else if(_Direction == DirectionType.Left)
+					break;
+				case DirectionType.Left:
 					_actionsOut[0] = 4;
+					break;
+				default:
+					_actionsOut[0] = 0;
+					break;
 			}
 		}
 		public override void CollectObservations(VectorSensor _sensor) => AddState(_sensor);

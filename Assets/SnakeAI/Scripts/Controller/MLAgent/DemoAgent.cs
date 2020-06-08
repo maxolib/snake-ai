@@ -4,13 +4,11 @@
 namespace SnakeAI.Controller
 {
 	// ReSharper disable once InconsistentNaming
-	public class ML1Agent : SnakeAgent
+	public class DemoAgent : SnakeAgent
     {
         protected override void AddState(VectorSensor _sensor)
         {
 	        // Add State
-	        _sensor.AddObservation(m_Controller.State.Head);
-	        _sensor.AddObservation(m_Controller.State.Food);
         }
 
         protected override void GameOverAction() => SetReward(-1f);
@@ -18,4 +16,6 @@ namespace SnakeAI.Controller
         protected override void WinAction() => SetReward(10f);
     }
 }
+
+
 

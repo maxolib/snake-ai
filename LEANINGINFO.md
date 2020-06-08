@@ -5,13 +5,14 @@
 - [Installation](https://github.com/Unity-Technologies/ml-agents/blob/release_2_docs/docs/Installation.md)
 - [Example Projects](https://github.com/Unity-Technologies/ml-agents/blob/release_2_docs/docs/Learning-Environment-Examples.md)
 - [*How to make Agents](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Design-Agents.md)
-- 
+
+  
 
 ## Python Command
 
 | Name                        | Command                                                      |
 | --------------------------- | ------------------------------------------------------------ |
-| Start training              | mlagents-learn config/trainer_config.yaml --run-id=ML1<br /><br />`--resume` - continuous old model<br />`--env` - path of unity executable file in case of build |
+| Start training              | mlagents-learn config/trainer_config.yaml --run-id=ML1<br /><br /> |
 | Observing Training Progress | tensorboard --logdir=summaries                               |
 |                             |                                                              |
 |                             |                                                              |
@@ -27,12 +28,3 @@
 | `--num-envs`            | number of concurrent Unity instances to use during training  |
 |                         |                                                              |
 
-## Training Type
-
-| Name | Command                      |
-| ---- | ---------------------------- |
-| PPO  | Proximal Policy Optimization |
-| SAC  | Soft Actor-Critic            |
-|      |                              |
-|      |                              |
-|      |                              |

@@ -20,6 +20,7 @@ namespace SnakeAI.Controller
             _sensor.AddObservation(m_Controller.State.Head);
             _sensor.AddObservation(m_Controller.State.Food);
             _sensor.AddObservation(m_Controller.State.Tails.Count);
+            
 			TraditionalObservable(_sensor);
 
 	        // Obs State
@@ -54,7 +55,7 @@ namespace SnakeAI.Controller
         }
 		private void TraditionalObservable(VectorSensor _sensor)
 		{
-			var _state = m_Controller.State;
+			var state = m_Controller.State;
 			// Need value function
             int NeedValue(int _value)
             {
@@ -63,8 +64,8 @@ namespace SnakeAI.Controller
                 else return 0;
             }
             // Head and Food position
-            var head = _state.Head;
-            var food = _state.Food;
+            var head = state.Head;
+            var food = state.Food;
             var horizontal = NeedValue((int) (food.x - head.x));
             var vertical = NeedValue((int) (food.y - head.y));
 			var vectorDirection = new Vector2(horizontal, vertical);

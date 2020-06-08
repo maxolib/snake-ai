@@ -51,7 +51,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
   m_Model: {fileID: 5022602860645237092, guid: 6ed26f89b22923e4e84d369e00e4179f, type: 3}
-  m_InferenceDevice: 0
+  m_InferenceDevice: 1
   m_BehaviorType: 0
   m_BehaviorName: ML6
   TeamId: 0

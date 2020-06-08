@@ -152,8 +152,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1723100672}
   - {fileID: 587393111}
+  - {fileID: 1723100672}
   m_Father: {fileID: 2146512888}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SnakeContainer: {fileID: 2876461876740012770, guid: 1ffadea75a9f0674b8c317ea6aa33ae9,
     type: 3}
-  m_BoardSpeed: 0.1
+  m_BoardSpeed: 0.05
   m_BoardSize: {x: 10, y: 10}
   m_GroundTransform: {fileID: 472175028}
   m_GroundRatio: {fileID: 472175032}
@@ -352,7 +352,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 472175028}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -414,7 +414,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sample
+  m_text: ML5
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 058f8cc84ac14d74f83ecb2b26f55b21, type: 2}
   m_sharedMaterial: {fileID: -2453960439007278017, guid: 058f8cc84ac14d74f83ecb2b26f55b21,
@@ -484,7 +484,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 953572504}
-    characterCount: 6
+    characterCount: 3
     spriteCount: 0
     spaceCount: 0
     wordCount: 1
@@ -546,7 +546,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 472175028}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
