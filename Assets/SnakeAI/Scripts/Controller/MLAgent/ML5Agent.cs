@@ -24,7 +24,7 @@ namespace SnakeAI.Controller
 			        switch(blockType)
 			        {
 				        case BlockType.Blank:
-					        _sensor.AddObservation(1);
+					        _sensor.AddObservation(1); 
 					        break;
 				        case BlockType.Head:
 					        _sensor.AddObservation(1);

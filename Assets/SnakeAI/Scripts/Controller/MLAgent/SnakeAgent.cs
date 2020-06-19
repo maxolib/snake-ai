@@ -22,11 +22,14 @@ namespace SnakeAI.Controller
 
 		public override void Initialize()
 		{
-			if (!m_Heuristic) return;
-			SetKeyObservable(KeyCode.LeftArrow, DirectionType.Left);
-			SetKeyObservable(KeyCode.RightArrow, DirectionType.Right);
-			SetKeyObservable(KeyCode.DownArrow, DirectionType.Down);
-			SetKeyObservable(KeyCode.UpArrow, DirectionType.Up);
+			// ReSharper disable once InvertIf
+			if (m_Heuristic)
+			{
+				SetKeyObservable(KeyCode.LeftArrow, DirectionType.Left);
+				SetKeyObservable(KeyCode.RightArrow, DirectionType.Right);
+				SetKeyObservable(KeyCode.DownArrow, DirectionType.Down);
+				SetKeyObservable(KeyCode.UpArrow, DirectionType.Up);
+			}
 		}
 		private void SetKeyObservable(KeyCode _keyCode, DirectionType _direction)
         {

@@ -20,6 +20,7 @@ namespace SnakeAI.Game
         [SerializeField] private Image m_FoodImage;
         [SerializeField] private Image m_TailImage;
         [SerializeField] private Transform m_TailTransform;
+        [SerializeField] private Transform m_SpaceTransform;
         [SerializeField] private TextMeshProUGUI m_ScoreText;
         
         [Header("Setting")]
@@ -28,7 +29,16 @@ namespace SnakeAI.Game
         [SerializeField] private Color m_FoodColor;
         
         // ---------------------------------------------------------------------------
-        public float BoardWidth => m_GroundTransform.sizeDelta.x;
+        public float BoardWidth
+        {
+            get
+            {
+                var ratio = m_GroundRatio.aspectRatio;
+                var size = transform.parent.GetComponent<RectTransform>().sizeDelta;
+                return ratio > 1 ? size.x : ratio * size.x;
+            }
+        }
+
         public float BlockSize => BoardWidth / BoardSize.x;
         public float BlockBorderSize => (BlockSize * 0.05f);
         // ---------------------------------------------------------------------------
@@ -41,8 +51,8 @@ namespace SnakeAI.Game
         {
             Score.Subscribe(_value => m_ScoreText.text = _value.ToString());
 
-            Head = CreateBlock(m_HeadImage, transform, m_HeadColor);
-            Food = CreateBlock(m_FoodImage, transform, m_FoodColor);
+            Head = CreateBlock(m_HeadImage, m_SpaceTransform, m_HeadColor);
+            Food = CreateBlock(m_FoodImage, m_SpaceTransform, m_FoodColor);
             SetBlockPosition(Head, Vector2.zero);
             SetBlockPosition(Food, Vector2.zero);
         }
@@ -69,7 +79,9 @@ namespace SnakeAI.Game
 
         private void SetBlockPosition(Image _obj, Vector2 _position)
         {
-            var position = _position * BlockSize;
+            var position = (_position * BlockSize);
+            position.x += BlockBorderSize;
+            position.y += BlockBorderSize;
             _obj.GetComponent<RectTransform>().localPosition = position;
         }
 
@@ -114,6 +126,8 @@ namespace SnakeAI.Game
             m_GroundRatio.aspectRatio = BoardSize.x / BoardSize.y;
             State = new State((int) BoardSize.x, (int) BoardSize.y);
             Score.SetValueAndForceNotify(0);
+            Head.GetComponent<RectTransform>().sizeDelta = new Vector2(BlockSize - 2 * BlockBorderSize, BlockSize - 2 * BlockBorderSize);
+            Food.GetComponent<RectTransform>().sizeDelta = new Vector2(BlockSize - 2 * BlockBorderSize, BlockSize - 2 * BlockBorderSize);
             
             if(Tails != null)
             {

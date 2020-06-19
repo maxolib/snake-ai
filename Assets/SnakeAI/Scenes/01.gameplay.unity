@@ -210,10 +210,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46432d29147bcdb4c80a69d23a77963c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SnakeContainer: {fileID: 2876461876740012770, guid: 1ffadea75a9f0674b8c317ea6aa33ae9,
+  m_SnakeContainer: {fileID: 2876461876740012770, guid: 714397bd87212ef469a7580f10dc07ca,
     type: 3}
   m_BoardSpeed: 0.05
-  m_BoardSize: {x: 10, y: 10}
+  m_BoardSize: {x: 20, y: 15}
   m_GroundTransform: {fileID: 472175028}
   m_GroundRatio: {fileID: 472175032}
   m_HeadImage: {fileID: 7907701627669252959, guid: e9a1167caaa38f94d8cb3382bcd0ef83,
@@ -414,7 +414,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ML5
+  m_text: ML8
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 058f8cc84ac14d74f83ecb2b26f55b21, type: 2}
   m_sharedMaterial: {fileID: -2453960439007278017, guid: 058f8cc84ac14d74f83ecb2b26f55b21,

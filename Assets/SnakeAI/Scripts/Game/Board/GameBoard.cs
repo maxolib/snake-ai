@@ -5,6 +5,7 @@ using SnakeAI.Scripts.Entities;
 using TMPro;
 using UniRx;
 using UnityEngine;
+using System.Linq;
 using UnityEngine.SocialPlatforms.Impl;
 
 namespace SnakeAI.Game
@@ -31,8 +32,15 @@ namespace SnakeAI.Game
         // ---------------------------------------------------------------------------
         private void Awake()
         {
-            var obj = Instantiate(m_SnakeContainer, transform);
-            Snake = obj.GetComponent<ISnake>();
+            if (m_SnakeContainer != null)
+            {
+                var obj = Instantiate(m_SnakeContainer, transform);
+                Snake = obj.GetComponent<ISnake>();
+            }
+            else
+            {
+                Snake = FindObjectsOfType<MonoBehaviour>().OfType<ISnake>().FirstOrDefault();
+            }
         }
         private void Start()
         {
@@ -90,6 +98,8 @@ namespace SnakeAI.Game
             RenderState();
             IsPlay = true;
         }
+        // ---------------------------------------------------------------------------
+        public void SetBoardSize(Vector2 _size) => m_BoardSize = _size;
         // ---------------------------------------------------------------------------
         #region ABSTRACT
 
