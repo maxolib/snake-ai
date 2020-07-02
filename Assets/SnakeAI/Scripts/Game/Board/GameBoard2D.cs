@@ -5,7 +5,6 @@ using SnakeAI.Scripts.Entities;
 using UnityEngine;
 using TMPro;
 using UniRx;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace SnakeAI.Game
@@ -34,7 +33,7 @@ namespace SnakeAI.Game
             get
             {
                 var ratio = m_GroundRatio.aspectRatio;
-                var size = transform.parent.GetComponent<RectTransform>().sizeDelta;
+                var size = m_GroundTransform.GetComponent<RectTransform>().sizeDelta;
                 return ratio > 1 ? size.x : ratio * size.x;
             }
         }
@@ -59,6 +58,7 @@ namespace SnakeAI.Game
 
         public Image CreateBlock(Image _obj, Transform _transform, Color _color)
         {
+            Debug.Log($"{BlockSize - 2 * BlockBorderSize}, {BlockSize}, {BlockBorderSize}");
             var image = Instantiate(_obj, _transform);
             image.color = _color;
             image.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, BlockSize - 2 * BlockBorderSize);

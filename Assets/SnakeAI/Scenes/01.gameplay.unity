@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46432d29147bcdb4c80a69d23a77963c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SnakeContainer: {fileID: 2876461876740012770, guid: 714397bd87212ef469a7580f10dc07ca,
+  m_SnakeContainer: {fileID: 2876461876740012770, guid: 692086cb7bca5b34196ff2f100258dc3,
     type: 3}
   m_BoardSpeed: 0.05
   m_BoardSize: {x: 20, y: 15}
@@ -223,6 +223,7 @@ MonoBehaviour:
   m_TailImage: {fileID: 7907701627669252959, guid: 3130baeef88c55b448a3f43fdd25f84b,
     type: 3}
   m_TailTransform: {fileID: 587393111}
+  m_SpaceTransform: {fileID: 472175028}
   m_ScoreText: {fileID: 1723100673}
   m_HeadColor: {r: 0.12487326, g: 0.5471698, b: 0, a: 1}
   m_TailColor: {r: 0.10953313, g: 0.4716981, b: 0.0022249965, a: 1}
@@ -414,7 +415,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ML8
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 058f8cc84ac14d74f83ecb2b26f55b21, type: 2}
   m_sharedMaterial: {fileID: -2453960439007278017, guid: 058f8cc84ac14d74f83ecb2b26f55b21,
@@ -443,7 +444,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 72
+  m_fontSize: 68.99
   m_fontSizeBase: 68.99
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -484,13 +485,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 953572504}
-    characterCount: 3
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
