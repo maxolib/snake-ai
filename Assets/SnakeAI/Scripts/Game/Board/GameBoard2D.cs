@@ -58,7 +58,6 @@ namespace SnakeAI.Game
 
         public Image CreateBlock(Image _obj, Transform _transform, Color _color)
         {
-            Debug.Log($"{BlockSize - 2 * BlockBorderSize}, {BlockSize}, {BlockBorderSize}");
             var image = Instantiate(_obj, _transform);
             image.color = _color;
             image.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, BlockSize - 2 * BlockBorderSize);
